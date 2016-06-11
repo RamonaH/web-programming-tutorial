@@ -2,6 +2,24 @@
  * Created by Maxi on 6/11/2016.
  */
 console.debug('loading agenda');
-var row= '<tr><td>Popescu</td><td>Ionel</td><td>0752094424</td></tr>';
 
-$('#agenda tbody').append(row);
+function getRow(person){
+    var firstName= person [0];
+    var lastName= person [1];
+    var row= '<tr><td>'+ firstName +'</td><td>' + lastName +'</td><td>0752094424</td></tr>';
+    return row;
+}
+
+var contacts= [
+        {firstName: 'Nicolae',lastName:'Matei'},
+        {firstName:'Pop',lastName:'Andrei'},
+        {firstName:'Sebi',lastName:'X'},
+        {firstName:'Oana',lastName:'Y'},
+        {firstName:'Ramo',lastName:'A'},
+        {firstName:'Ramo',lastName:'B'}
+];
+
+for (var i = 0; i<contacts.length; i++){
+    var person= contacts[i];
+    $('#agenda tbody').append(getRow(person));
+}
