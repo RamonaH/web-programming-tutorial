@@ -1,7 +1,7 @@
 /**
  * Created by Maxi on 6/11/2016.
  */
-console.debug('loading agenda');
+console.debug('1) loading agenda');
 
 function getRow(person){
     var firstName= person.firstName;
@@ -10,16 +10,18 @@ function getRow(person){
     return row;
 }
 
-var contacts= [
-        {firstName: 'Nicolae',lastName:'Matei'},
-        {firstName:'Pop',lastName:'Andrei'},
-        {firstName:'Sebi',lastName:'X'},
-        {firstName:'Oana',lastName:'Y'},
-        {firstName:'Ramo',lastName:'A'},
-        {firstName:'Ramo',lastName:'B'}
-];
+$.ajax({
+    url: "js/mocks/load-contacts.json"
+}).done(function(contacts) {
+   console.debug (' 3) ajax done',contacts);
+    showContacts(contacts);
+});
 
-for (var i = 0; i<contacts.length; i++){
-    var person= contacts[i];
-    $('#agenda tbody').append(getRow(person));
+console.debug(' 2) after ajax');
+
+function showContacts (contacts){
+    for (var i = 0; i<contacts.length; i++){
+        var person= contacts[i];
+        $('#agenda tbody').append(getRow(person));
+    }
 }
