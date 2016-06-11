@@ -1,9 +1,9 @@
 [
-  {"firstName": "Nicolae","lastName":"Matei"},
-  {"firstName":"Pop","lastName":"Andrei"},
-  {"firstName":"Sebi","lastName":"X"},
-  {"firstName":"Oana","lastName":"Y"},
-  {"firstName":"Ramo","lastName":"A"},
-  {"firstName":"Ramo","lastName":"B"}
+  {"id": 1,"firstName": "Nicolae","lastName":"Matei","phone":"0745219243"},
+  {"id": 2,"firstName":"Pop","lastName":"Andrei","phone":"0745219244"},
+  {"id": 3,"firstName":"Sebi","lastName":"X","phone":"0745219245"},
+  {"id": 4,"firstName":"Oana","lastName":"Y","phone":"0745219246"},
+  {"id": 5,"firstName":"Ramo","lastName":"A","phone":"0745219247"},
+  {"id": 6,"firstName":"Ramo","lastName":"B","phone":"0745219248"}
 ]
 

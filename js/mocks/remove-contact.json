@@ -1,4 +1,6 @@
 [
-  ["Matei Nicolae",   "0756000000", "1"],
-  ["Matei X", "0756000001", "2"]
+  {"id": 1,"firstName": "Nicolae","lastName":"Matei","phone":"0745219243"},
+  {"id": 2,"firstName":"Pop","lastName":"Andrei","phone":"0745219244"},
+  {"id": 3,"firstName":"Sebi","lastName":"X","phone":"0745219245"},
+  {"id": 4,"firstName":"Oana","lastName":"Y","phone":"0745219246"}
 ]

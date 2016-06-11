@@ -89,12 +89,21 @@
 
             <h1>Agenda</h1>
 
+            <form action="agenda.html" method="post">
+                <input type="text" name="firstName" placeholder="Nume" required="required">
+                <input type="text"name="lastName" placeholder="Prenume">
+                <input type="text" name="phone" placeholder="Telefon">
+                <button>Add</button>
+            </form>
+            <br>
+
             <table id="agenda">
                 <thead>
                     <tr>
                         <th>Nume</th>
                         <th>Prenume</th>
                         <th>Telefon</th>
+                        <th width="50px"> </th>
                     </tr>
                 </thead>
                 <tbody>
