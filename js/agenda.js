@@ -11,7 +11,8 @@ function getRow(person){
         '<td>'+ firstName + '</td>' +
         '<td>' + lastName + '</td>' +
         '<td>'+ phone+'</td>'+
-        '<td><button data-id="'+ person.id + '">remove</button></td>'+
+        '<td><button data-id="'+ person.id + '" class=" remove">remove</button>'+
+        '<button data-id="'+ person.id + '" class="edit">edit</button></td>'+
         '</tr>';
     return row;
 }
@@ -39,6 +40,26 @@ function removeContact(id){
 
 console.debug(' 2) after ajax');
 
+var newContact= '';
+
+function editareContact (id){
+
+    $.ajax({
+
+        url: "js/mocks/load-contacts.json"
+        }).done(function(contacts){
+        newContact=id;
+        var newPerson= contacts [id-1];
+        console.debug (newPerson);
+        $("input[name='firstName']").val(newPerson.firstName);
+        $("input[name='lastName']").val(newPerson.lastName);
+        $("input[name='phone']").val(newPerson.phone);
+
+
+    });
+
+}
+
 function showContacts (contacts){
     $('#agenda tbody').html('');
     for (var i = 0; i<contacts.length; i++){
@@ -47,8 +68,14 @@ function showContacts (contacts){
     }
 }
 
-$('#agenda ').on('click','button',function(){
+$('#agenda ').on('click','button.remove',function(){
     var id = $(this).data('id');
     console.info ('remove this contact',this, id);
     removeContact(id);
+});
+
+$('#agenda ').on('click','button.edit',function(){
+    var id = $(this).data('id');
+    console.info ('edit this contact',this, id);
+    editareContact(id);
 });
