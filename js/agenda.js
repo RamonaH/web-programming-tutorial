@@ -18,17 +18,21 @@ function getRow(person){
 }
 
 $.ajax({
-    url: "js/mocks/load-contacts.json"
+    url: "servlets/load-contacts.php",
+    dataType: 'json',
+    cache:false
 }).done(function(contacts) {
    console.debug (' 3) ajax done',contacts);
     showContacts(contacts);
 });
 
-function removeContact(id){
+function removeContact(id) {
 
 
     $.ajax({
-        url: "js/mocks/remove-contact.json",
+        url: "servlets/remove-contact.php",
+        dataType: 'json',
+        //Delete
         type: 'POST',
         data: {
             id: id
@@ -37,45 +41,68 @@ function removeContact(id){
         showContacts(contacts);
     });
 }
-
-console.debug(' 2) after ajax');
-
-var newContact= '';
-
-function editareContact (id){
-
-    $.ajax({
-
-        url: "js/mocks/load-contacts.json"
-        }).done(function(contacts){
-        newContact=id;
-        var newPerson= contacts [id-1];
-        console.debug (newPerson);
-        $("input[name='firstName']").val(newPerson.firstName);
-        $("input[name='lastName']").val(newPerson.lastName);
-        $("input[name='phone']").val(newPerson.phone);
+    //function addContact(id) {
+    //
+    //
+    //    $.ajax({
+    //        url: "servlets/save-contact.php",
+    //        dataType: 'json',
+    //        //Delete
+    //        type: 'POST',
+    //        data: {
+    //            id: id
+    //        }
+    //    }).done(function (contacts) {
+    //        addContact(contacts);
+    //    });
 
 
+
+    console.debug(' 2) after ajax');
+
+    var newContact = '';
+
+    function editareContact(id) {
+
+        $.ajax({
+
+            url: "js/mocks/load-contacts.json"
+        }).done(function (contacts) {
+            //newContact=id;
+            var newPerson = contacts [id - 1];
+            console.debug(newPerson);
+            $("input[name='firstName']").val(newPerson.firstName);
+            $("input[name='lastName']").val(newPerson.lastName);
+            $("input[name='phone']").val(newPerson.phone);
+
+
+        });
+
+    }
+
+    function showContacts(contacts) {
+        $('#agenda tbody').html('');
+        for (var i = 0; i < contacts.length; i++) {
+            var person = contacts[i];
+            $('#agenda tbody').append(getRow(person));
+        }
+    }
+
+    $('#agenda ').on('click', 'button.remove', function () {
+        var id = $(this).data('id');
+        console.info('remove this contact', this, id);
+        removeContact(id);
     });
 
-}
+    $('#agenda ').on('click', 'button.edit', function () {
+        var id = $(this).data('id');
+        console.info('edit this contact', this, id);
+        editareContact(id);
+    });
 
-function showContacts (contacts){
-    $('#agenda tbody').html('');
-    for (var i = 0; i<contacts.length; i++){
-        var person= contacts[i];
-        $('#agenda tbody').append(getRow(person));
-    }
-}
+    //$('#agenda ').on('click', 'button.add', function () {
+    //    var id = $(this).data('id');
+    //    console.info('add this contact', this, id);
+    //    addContact(id);
+    //});
 
-$('#agenda ').on('click','button.remove',function(){
-    var id = $(this).data('id');
-    console.info ('remove this contact',this, id);
-    removeContact(id);
-});
-
-$('#agenda ').on('click','button.edit',function(){
-    var id = $(this).data('id');
-    console.info ('edit this contact',this, id);
-    editareContact(id);
-});
