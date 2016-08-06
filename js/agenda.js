@@ -17,20 +17,28 @@ function getRow(person){
     return row;
 }
 
-$.ajax({
-    url: "servlets/load-contacts.php",
-    dataType: 'json',
-    cache:false
-}).done(function(contacts) {
-   console.debug (' 3) ajax done',contacts);
-    showContacts(contacts);
-});
+
+function loadContacts() {
+    $.ajax({
+        url: template_directory_uri+"/servlets/load-contacts.php",
+        dataType: 'json',
+        cache: false
+    }).done(function (contacts) {
+        console.debug(' agenda loaded', contacts);
+        showContacts(contacts);
+    });
+}
+
+if($('#agenda').length) {
+
+    loadContacts();
+}
 
 function removeContact(id) {
 
 
     $.ajax({
-        url: "servlets/remove-contact.php",
+        url:template_directory_uri+ "/servlets/remove-contact.php",
         dataType: 'json',
         //Delete
         type: 'POST',
@@ -66,7 +74,7 @@ function removeContact(id) {
 
         $.ajax({
             dataType: 'json',
-            url: "servlets/edit-contact.php"
+            url: template_directory_uri+"/servlets/edit-contact.php"
         }).done(function (contacts) {
             //newContact=id;
             var newPerson = contacts [id - 1];
