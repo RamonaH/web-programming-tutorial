@@ -65,8 +65,8 @@ function removeContact(id) {
     function editareContact(id) {
 
         $.ajax({
-
-            url: "js/mocks/load-contacts.json"
+            dataType: 'json',
+            url: "servlets/edit-contact.php"
         }).done(function (contacts) {
             //newContact=id;
             var newPerson = contacts [id - 1];

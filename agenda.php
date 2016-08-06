@@ -32,6 +32,7 @@ if (isset($_POST["firstName"])) {
     <input type="text" name="lastName" placeholder="Prenume">
     <input type="text" name="phone" placeholder="Telefon">
     <button>Add</button>
+
 </form>
 <br>
 
