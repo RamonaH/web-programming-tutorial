@@ -3,7 +3,7 @@
 <?php //Save contact if necesary
 
 if (isset($_POST["firstName"])) {
-    if (isset($_POST["id"])) {
+    if (isset($_POST["id"]) && $_POST ["id"] !='') {
 
         include("servlets/edit-contact.php");
 
