@@ -2,7 +2,7 @@
 
 function getContacts ($conn)
 {
-    $result = pg_query($conn, 'select *from "Agenda"');
+    $result = pg_query($conn, 'select *from "Agenda" order BY nume, prenume ');
     $records = array();
 
     while ($row = pg_fetch_array($result)) {
