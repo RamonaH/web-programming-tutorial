@@ -3,7 +3,14 @@
 <?php //Save contact if necesary
 
 if (isset($_POST["firstName"])) {
-    include ("servlets/save-contact.php");
+    if (isset($_POST["id"])) {
+
+        include("servlets/edit-contact.php");
+
+        echo "<p> Contact successfuly updated!</p>";
+    } else {
+        include("servlets/save-contact.php");
+
 //    $filename= "js/mocks/load-contacts.json";
 //    $allContactsStr = file_get_contents($filename);
 //    $allContacts = json_decode($allContactsStr);
@@ -18,7 +25,8 @@ if (isset($_POST["firstName"])) {
 //
 //    );
 
-    echo "<p> Contact successfuly added!</p>";
+        echo "<p> Contact successfuly added!</p>";
+    }
 }
 ?>
 
@@ -32,6 +40,7 @@ if (isset($_POST["firstName"])) {
     <input type="text" name="lastName" placeholder="Prenume">
     <input type="text" name="phone" placeholder="Telefon">
     <button>Add</button>
+    <button class=" update">Update</button>
 
 </form>
 <br>

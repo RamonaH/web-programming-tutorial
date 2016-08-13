@@ -62,24 +62,11 @@ function removeContact(id) {
 
     console.debug(' 2) after ajax');
 
-    var newContact = '';
-
-function editareContact(id) {
-
-    $.ajax({
-        dataType: 'json',
-        url: "servlets/edit-contact.php"
-    }).done(function (contacts) {
-        //newContact=id;
-        var newPerson = findContactById(id);
-        console.debug(newPerson);
-        $("[name='id']").val(newPerson.id);
-        $("[name='firstName']").val(newPerson.firstName);
-        $("[name='lastName']").val(newPerson.lastName);
-        $("[name='phone']").val(newPerson.phone);
-
-
-    });
+function editareContact(Person) {
+    $("[name='id']").val(Person.id);
+    $("[name='firstName']").val(Person.firstName);
+    $("[name='lastName']").val(Person.lastName);
+    $("[name='phone']").val(Person.phone);
 
 }
 
@@ -99,7 +86,7 @@ function findContactById (id) {
 
         var Person = allContacts [i];
 
-        if (id = Person.id) {
+        if (id == Person.id) {
             return Person;
         }
     }
@@ -113,8 +100,9 @@ $('#agenda ').on('click', 'button.remove', function () {
 
 $('#agenda ').on('click', 'button.edit', function () {
     var id = $(this).data('id');
-    console.info('edit this contact', this, id);
-    editareContact(id);
+    var Person= findContactById(id);
+    console.info('edit this contact', this, id, Person);
+    editareContact(Person);
 });
 
 
