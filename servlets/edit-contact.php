@@ -9,7 +9,7 @@ $prenume= $_POST ["lastName"];
 $telefon = $_POST ["phone"];
 
 $resultEdit= pg_query($conn,'UPDATE "Agenda"
-        SET ($nume,$prenume,$telefon) WHERE "ID"=50');
+        SET ($nume,$prenume,$telefon) WHERE "ID"=' .$id);
 
 if ($conn->query($resultEdit) === TRUE) {
     echo "Record updated successfully";

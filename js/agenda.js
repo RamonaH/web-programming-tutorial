@@ -8,12 +8,14 @@ function getRow(person){
     var lastName= person.lastName;
     var phone= person.phone;
     var row= '<tr>' +
-        '<td>'+ firstName + '</td>' +
+        '<td>' + firstName + '</td>' +
         '<td>' + lastName + '</td>' +
-        '<td>'+ phone+'</td>'+
-        '<td><button data-id="'+ person.id + '" class=" remove">remove</button>'+
-        '<button data-id="'+ person.id + '" class="edit">edit</button></td>'+
-        '</tr>';
+        '<td>' + phone + '</td>' +
+        '<td>' +
+            '<button class="remove" data-id="' + person.id + '">remove</button>' +
+            '<button class="edit" data-id="' + person.id + '">edit</button>' +
+        '</td>'+
+    '</tr>';
     return row;
 }
 
@@ -26,9 +28,9 @@ $.ajax({
     showContacts(contacts);
 });
 
+
+
 function removeContact(id) {
-
-
     $.ajax({
         url: "servlets/remove-contact.php",
         dataType: 'json',
@@ -62,47 +64,57 @@ function removeContact(id) {
 
     var newContact = '';
 
-    function editareContact(id) {
+function editareContact(id) {
 
-        $.ajax({
-            dataType: 'json',
-            url: "servlets/edit-contact.php"
-        }).done(function (contacts) {
-            //newContact=id;
-            var newPerson = contacts [id - 1];
-            console.debug(newPerson);
-            $("input[name='firstName']").val(newPerson.firstName);
-            $("input[name='lastName']").val(newPerson.lastName);
-            $("input[name='phone']").val(newPerson.phone);
+    $.ajax({
+        dataType: 'json',
+        url: "servlets/edit-contact.php"
+    }).done(function (contacts) {
+        //newContact=id;
+        var newPerson = findContactById(id);
+        console.debug(newPerson);
+        $("[name='id']").val(newPerson.id);
+        $("[name='firstName']").val(newPerson.firstName);
+        $("[name='lastName']").val(newPerson.lastName);
+        $("[name='phone']").val(newPerson.phone);
 
 
-        });
+    });
 
+}
+
+var allContacts= [];
+function showContacts(contacts) {
+    allContacts= contacts;
+    $('#agenda tbody').html('');
+    for (var i = 0; i < contacts.length; i++) {
+        var person = contacts[i];
+        $('#agenda tbody').append(getRow(person));
     }
+}
 
-    function showContacts(contacts) {
-        $('#agenda tbody').html('');
-        for (var i = 0; i < contacts.length; i++) {
-            var person = contacts[i];
-            $('#agenda tbody').append(getRow(person));
+function findContactById (id) {
+
+    for (var i = 0; i < allContacts.length; i++) {
+
+        var Person = allContacts [i];
+
+        if (id = Person.id) {
+            return Person;
         }
     }
+}
 
-    $('#agenda ').on('click', 'button.remove', function () {
-        var id = $(this).data('id');
-        console.info('remove this contact', this, id);
-        removeContact(id);
-    });
+$('#agenda ').on('click', 'button.remove', function () {
+    var id = $(this).data('id');
+    console.info('remove this contact', this, id);
+    removeContact(id);
+});
 
-    $('#agenda ').on('click', 'button.edit', function () {
-        var id = $(this).data('id');
-        console.info('edit this contact', this, id);
-        editareContact(id);
-    });
+$('#agenda ').on('click', 'button.edit', function () {
+    var id = $(this).data('id');
+    console.info('edit this contact', this, id);
+    editareContact(id);
+});
 
-    //$('#agenda ').on('click', 'button.add', function () {
-    //    var id = $(this).data('id');
-    //    console.info('add this contact', this, id);
-    //    addContact(id);
-    //});
 
