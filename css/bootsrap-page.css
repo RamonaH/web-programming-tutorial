@@ -1,0 +1,8 @@
+.borders {
+    border: 4px solid gray;
+
+}
+
+.b-red {border-color:red}
+.b-blue{border-color: blue }
+.b-green {border-color: green}
